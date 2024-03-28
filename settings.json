@@ -1,0 +1,102 @@
+{
+    "update_paper": true,
+    // do not enter the version suffix; 1.18.2 -> 1.18
+    "version": "1.20",
+    "filename": "server.jar",
+    // NOT RECOMMENDED always uses the latest mc version when set to true
+    "get_latest_mc_version": false,
+    // leave empty if you don't want to download anything from curseforge
+    // otherwise, get your api key from https://console.curseforge.com/
+    "curseforge_api_key": "",
+    "plugins":
+        {
+            "loaders":
+            // Used to fetch the appropriate plugin versions from modrinth
+            // Uncomment the loaders you want to use 
+                [
+                    // "bukkit",
+                    // "folia",
+                    "paper"
+                    // "purpur",
+                    // "spigot",
+                    // "sponge"
+                ],
+            "github":
+                [
+                    "https://github.com/rutgerkok/BlockLocker/",
+                    "https://github.com/milkbowl/Vault/",
+                    "https://github.com/ChestShop-authors/ChestShop-3/",
+                    // "https://github.com/Rammelkast/AntiCheatReloaded/",
+                    // "https://github.com/ViaVersion/ViaVersion/",
+                    "https://github.com/NEZNAMY/TAB/",
+                    "https://github.com/dmulloy2/ProtocolLib/"
+                ],
+            "bukkit":
+                [
+                    "https://dev.bukkit.org/projects/worldedit/",
+                    "https://dev.bukkit.org/projects/worldguard/"
+                ],
+            "modrinth":
+                [
+                    "9eGKb6K1" // Simple voice chat
+                ],
+            "custom":
+                [
+                ],
+            "essentials":
+                {
+                    "core": true,
+                    "AntiBuild": false,
+                    "Chat": true,
+                    "Discord": false,
+                    "GeoIP": false,
+                    "Protect": false,
+                    "Spawn": true,
+                    "XXMPP": false
+                },
+            "luckperms": true,
+            "geyser": false,
+            "floodgate": false
+        },
+    "datapacks":
+        {
+            "github":
+                [
+                    "https://github.com/Scommander/ExplosionRebuilderDatapack/"
+                ],
+            "modrinth":
+                [
+                    "tpehi7ww" // dungeons-and-taverns
+                ]
+        },
+    "mods":
+        {
+            "loaders":
+            // Used to fetch the appropriate mod versions from modrinth
+            // Uncomment the loaders you want to use 
+                [
+                    "fabric"
+                    // "neoforge",
+                    // "forge",
+                    // "rift",
+                    // "modloader", // Risugami's ModLoader
+                    // "liteloader"
+                ],
+            "curseforge":
+                [
+                    //"513688", // Terralith
+                    //"225603", // Schematica
+                    // "328085", // Create
+                    // "225643", // Botania
+                    // "486392", // Flywheel
+                    // "306770", // Patchouli
+                    // "309927"  // Curios API (Forge)
+                    
+                    
+                ],
+            "modrinth":
+                [
+                    "gvQqBUqZ" // Lithium
+                ]
+        }
+}
