@@ -3,6 +3,7 @@ import pyjson5 as json
 import os
 import zipfile
 import shutil
+from bs4 import BeautifulSoup
 
 # If desired mc version is 1.18.2, only type 1.18
 # If an other mc version is released, you can always
@@ -39,7 +40,7 @@ filename = settings["filename"]
 get_latest_mc_version = settings["get_latest_mc_version"]
 curseforge_api_key = settings["curseforge_api_key"]
 
-# get the build number of the most recent build
+# get the build number of the most recent build (for paper)
 if get_latest_mc_version:
     version = json.loads(requests.get(f"{api}/projects/paper").content.decode("utf-8"))["version_groups"][-1]
 
@@ -55,17 +56,50 @@ latest_build = latest_build["build"]
 if version_suffix == ".0":
     version_suffix = ""
 
-print(f"mc version : {version}{version_suffix}")
-
-if settings["update_paper"]:
-    # construct download URL
+def download_paper():
     download_url = f"{api}/projects/paper/versions/{version}{version_suffix}/builds/{latest_build}/downloads/paper-{version}{version_suffix}-{latest_build}.jar"
-    # print(f"url : {download_url}")
-
-    # download file
     print("downloading paper ...")
     response = requests.get(download_url)
     open(filename, "wb").write(response.content)
+
+print(f"mc version : {version}{version_suffix}")
+
+if settings["update_server_mod"]:
+    if settings["server_mod"] == "paper":
+        download_paper()
+    elif settings["server_mod"] == "bukkit" or settings["server_mod"] == "spigot":
+        print(f"Not implemented yet, falling back to paper (why using {settings['server_mod']} in the first place?)")
+        download_paper()
+    elif settings["server_mod"] == "folia":
+        print("Folia doesn't have any public binary released, skipping")
+    elif settings["server_mod"] == "purpur":
+        print("downloading purpur ...")
+        download_url = f"https://api.purpurmc.org/v2/purpur/{version}{version_suffix}/latest/download"
+        open(filename, "wb").write(requests.get(download_url).content)
+    elif settings["server_mod"] == "sponge":
+        url = "https://repo.spongepowered.org/service/rest/repository/browse/maven-releases/org/spongepowered/spongeforge/"
+        response = requests.get(url)
+        soup = BeautifulSoup(response.content, "html.parser")
+        artefacts = soup.find_all("a")
+        current = ""
+        match_found = False
+        for link in artefacts:
+            prev = current
+            current = link["href"]
+            if current.startswith(version + version_suffix):
+                match_found = True
+            else:
+                match_found = False
+            if not match_found and prev.startswith(version + version_suffix):
+                artefact = prev[:-1]
+                break
+            if link == artefacts[-1]:
+                artefact = "false"
+                print("No corresponding version found for sponge, skipping")
+        if artefact != "false":
+            download_url = f"https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongeforge/{artefact}/spongeforge-{artefact}-universal.jar"
+            print("downloading sponge ...")
+            open(filename, "wb").write(requests.get(download_url).content)
 
 #creates paths if they don't already exist
 paths = ["./plugins", "./world", "./world/datapacks"]

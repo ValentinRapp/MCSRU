@@ -3,7 +3,7 @@
     // available server mods:
     // bukkit, folia, paper, purpur, spigot, sponge
     "server_mod": "paper",
-    "update_paper": true,
+    "update_server_mod": true,
     // do not enter the version suffix; 1.18.2 -> 1.18
     "version": "1.20",
     "filename": "server.jar",
