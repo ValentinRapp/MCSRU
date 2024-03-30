@@ -77,6 +77,7 @@ if settings["update_server_mod"]:
         download_url = f"https://api.purpurmc.org/v2/purpur/{version}{version_suffix}/latest/download"
         open(filename, "wb").write(requests.get(download_url).content)
     elif settings["server_mod"] == "sponge":
+        print("downloading sponge ...")
         url = "https://repo.spongepowered.org/service/rest/repository/browse/maven-releases/org/spongepowered/spongeforge/"
         response = requests.get(url)
         soup = BeautifulSoup(response.content, "html.parser")
@@ -98,7 +99,6 @@ if settings["update_server_mod"]:
                 print("No corresponding version found for sponge, skipping")
         if artefact != "false":
             download_url = f"https://repo.spongepowered.org/repository/maven-releases/org/spongepowered/spongeforge/{artefact}/spongeforge-{artefact}-universal.jar"
-            print("downloading sponge ...")
             open(filename, "wb").write(requests.get(download_url).content)
 
 #creates paths if they don't already exist
