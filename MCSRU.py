@@ -111,15 +111,8 @@ for i in settings["plugins"]["modrinth"]:
     print(f"{name} ...")
     
     j = 0
-    iterate = True
-    while iterate:
-        availaible_loaders = data[j]["loaders"]
-        for loader in settings["plugins"]["loaders"]:
-            if loader in availaible_loaders:
-                iterate = False
-                break
+    while settings["server_mod"] not in data[j]["loaders"]:
         j += 1
-    j -= 1
     link = data[j]["files"][0]["url"]
     open(f"./plugins/{name}.jar", "wb").write(requests.get(link).content)
 

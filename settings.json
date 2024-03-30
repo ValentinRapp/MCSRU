@@ -1,4 +1,8 @@
 {
+    // This is used to know which server mod to update and which plugin version to download using modrinth
+    // available server mods:
+    // bukkit, folia, paper, purpur, spigot, sponge
+    "server_mod": "paper",
     "update_paper": true,
     // do not enter the version suffix; 1.18.2 -> 1.18
     "version": "1.20",
@@ -8,19 +12,9 @@
     // leave empty if you don't want to download anything from curseforge
     // otherwise, get your api key from https://console.curseforge.com/
     "curseforge_api_key": "",
+    
     "plugins":
         {
-            "loaders":
-            // Used to fetch the appropriate plugin versions from modrinth
-            // Uncomment the loaders you want to use 
-                [
-                    // "bukkit",
-                    // "folia",
-                    "paper"
-                    // "purpur",
-                    // "spigot",
-                    // "sponge"
-                ],
             "github":
                 [
                     "https://github.com/rutgerkok/BlockLocker/",
