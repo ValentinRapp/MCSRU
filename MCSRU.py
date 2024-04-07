@@ -144,12 +144,14 @@ for i in settings["plugins"]["modrinth"]:
     
     print(f"{name} ...")
     
-    j = 0
-    while settings["server_mod"] not in data[j]["loaders"]:
-        j += 1
-    link = data[j]["files"][0]["url"]
-    open(f"./plugins/{name}.jar", "wb").write(requests.get(link).content)
-
+    try:
+        j = 0
+        while settings["server_mod"] not in data[j]["loaders"]:
+            j += 1
+        link = data[j]["files"][0]["url"]
+        open(f"./plugins/{name}.jar", "wb").write(requests.get(link).content)
+    except IndexError:
+        print("no matching server mod found, skipping plugin")
 
 if settings["plugins"]["custom"]:
     for url in settings["plugins"]["custom"]:
@@ -224,10 +226,14 @@ for i in settings["datapacks"]["modrinth"]:
     data = requests.get(f"https://api.modrinth.com/v2/project/{i}/version").json()
     
     print(f"{name} ...")
-    
-    j = 0
-    while "datapack" not in data[j]["loaders"] and f"{version}{version_suffix}" not in data[j]["game_versions"]:
-        j += 1
+    try:
+        j = 0
+        while "datapack" not in data[j]["loaders"] or f"{version}{version_suffix}" not in data[j]["game_versions"]:
+            j += 1
+        print(data[j]["game_versions"])
+    except IndexError:
+        print("no matching version found, downloading latest version instead (will most likely break)")
+        j = -1
     link = data[j]["files"][0]["url"]
     open(f"./world/datapacks/{name}.zip", "wb").write(requests.get(link).content)
 
@@ -269,16 +275,19 @@ for i in settings["mods"]["modrinth"]:
     
     print(f"{name} ...")
     
-    j = 0
-    iterate = True
-    while iterate:
-        availaible_loaders = data[j]["loaders"]
-        mod_versions = data[j]["game_versions"]
-        for loader in settings["mods"]["loaders"]:
-            if loader in availaible_loaders and f"{version}{version_suffix}" in mod_versions:
-                iterate = False
-                break
-        j += 1
-    j -= 1
-    link = data[j]["files"][0]["url"]
-    open(f"./mods/{name}.jar", "wb").write(requests.get(link).content)
+    try:
+        j = 0
+        iterate = True
+        while iterate:
+            availaible_loaders = data[j]["loaders"]
+            mod_versions = data[j]["game_versions"]
+            for loader in settings["mods"]["loaders"]:
+                if loader in availaible_loaders and f"{version}{version_suffix}" in mod_versions:
+                    iterate = False
+                    break
+            j += 1
+        j -= 1
+        link = data[j]["files"][0]["url"]
+        open(f"./mods/{name}.jar", "wb").write(requests.get(link).content)
+    except IndexError:
+        print("no matching version found, skipping mod")

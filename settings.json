@@ -90,7 +90,8 @@
                 ],
             "modrinth":
                 [
-                    "gvQqBUqZ" // Lithium
+                    "gvQqBUqZ", // Lithium
+                    "jD83XfJG" // forge nbt viewer
                 ]
         }
 }
