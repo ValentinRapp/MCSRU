@@ -230,7 +230,6 @@ for i in settings["datapacks"]["modrinth"]:
         j = 0
         while "datapack" not in data[j]["loaders"] or f"{version}{version_suffix}" not in data[j]["game_versions"]:
             j += 1
-        print(data[j]["game_versions"])
     except IndexError:
         print("no matching version found, downloading latest version instead (will most likely break)")
         j = -1

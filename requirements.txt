@@ -1,0 +1,5 @@
+requests
+pyjson5
+zipfile36
+pytest-shutil
+beautifulsoup4
