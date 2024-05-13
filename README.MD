@@ -35,3 +35,9 @@ There is a template `settings.json` file in the repo with a lot of resources pre
 > This tool works by downloading the resources needed by fetching them from their sources directly, such as cursforge or modrinth for example, so you'll need to provide a link to the sources of the resources you want, but you'll only need to do that once for the initial configuration!
 
 Once you've tested your updated clone and it works like it should, you can copy the relevent files into your main server, and tada, your server's now updated!
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change
+
+Also, would you mind leaving a star? :)
