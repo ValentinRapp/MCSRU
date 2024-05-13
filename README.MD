@@ -32,7 +32,7 @@ You can run the tool using `python MCSRU.py`.
 
 There is a template `settings.json` file in the repo with a lot of resources pre-configured, you can look at it so you can write your own configuration file from it for your server's specific needs.
 
-> This tool works by downloading the resources needed by fetching them from their sources directly, such as cursforge or modrinth for example, so you'll need to provide a link to the sources of the resources you want, but you'll only need to do that once for the initial configuration!
+> This tool works by downloading the resources needed by fetching them directly from their sources, such as curseforge or modrinth for example, so you'll need to provide a link to the sources of the resources you want, but you'll only need to do that once for the initial configuration!
 
 Once you've tested your updated clone and it works like it should, you can copy the relevent files into your main server, and tada, your server's now updated!
 
